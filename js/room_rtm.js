@@ -1,83 +1,53 @@
-let handleMemberJoined = async (MemberId) => {
-    console.log('A new member has joined the room:', MemberId)
-    addMemberToDom(MemberId)
+// Member management functions for Socket.IO integration
 
-    let members = await channel.getMembers()
-    updateMemberTotal(members)
-
-    let {name} = await rtmClient.getUserAttributesByKeys(MemberId, ['name'])
-    addBotMessageToDom(`Welcome to the room ${name}! 👋`)
+let handleMemberJoined = async (userId, displayName) => {
+    console.log('A new member has joined the room:', displayName)
+    addMemberToDom(userId, displayName)
+    addBotMessageToDom(`Welcome to the room ${displayName}! 👋`)
 }
 
-let addMemberToDom = async (MemberId) => {
-    let {name} = await rtmClient.getUserAttributesByKeys(MemberId, ['name'])
-
+let addMemberToDom = async (userId, displayName) => {
     let membersWrapper = document.getElementById('member__list')
-    let memberItem = `<div class="member__wrapper" id="member__${MemberId}__wrapper">
+    let memberItem = `<div class="member__wrapper" id="member__${userId}__wrapper">
                         <span class="green__icon"></span>
-                        <p class="member_name">${name}</p>
+                        <p class="member_name">${displayName}</p>
                     </div>`
 
     membersWrapper.insertAdjacentHTML('beforeend', memberItem)
 }
 
-let updateMemberTotal = async (members) => {
+let updateMemberTotal = async (count) => {
     let total = document.getElementById('members__count')
-    total.innerText = members.length
+    total.innerText = count
 }
  
-let handleMemberLeft = async (MemberId) => {
-    removeMemberFromDom(MemberId)
-
-    let members = await channel.getMembers()
-    updateMemberTotal(members)
+let handleMemberLeft = async (userId, displayName) => {
+    removeMemberFromDom(userId, displayName)
 }
 
-let removeMemberFromDom = async (MemberId) => {
-    let memberWrapper = document.getElementById(`member__${MemberId}__wrapper`)
-    let name = memberWrapper.getElementsByClassName('member_name')[0].textContent
-    addBotMessageToDom(`${name} has left the room.`)
-        
-    memberWrapper.remove()
-}
-
-let getMembers = async () => {
-    let members = await channel.getMembers()
-    updateMemberTotal(members)
-    for (let i = 0; members.length > i; i++){
-        addMemberToDom(members[i])
+let removeMemberFromDom = async (userId, displayName) => {
+    let memberWrapper = document.getElementById(`member__${userId}__wrapper`)
+    if (memberWrapper) {
+        addBotMessageToDom(`${displayName} has left the room.`)
+        memberWrapper.remove()
     }
 }
 
-let handleChannelMessage = async (messageData, MemberId) => {
-    console.log('A new message was received')
-    let data = JSON.parse(messageData.text)
+// This function is now handled by the WebRTC manager
+// Members are automatically added when room-members event is received
 
-    if(data.type === 'chat'){
-        addMessageToDom(data.displayName, data.message)
-    }
-
-    if(data.type === 'user_left'){
-        document.getElementById(`user-container-${data.uid}`).remove()
-
-        if(userIdInDisplayFrame === `user-container-${uid}`){
-            displayFrame.style.display = null
-    
-            for(let i = 0; videoFrames.length > i; i++){
-                videoFrames[i].style.height = '300px'
-                videoFrames[i].style.width = '300px'
-            }
-        }
-    }
-}
+// Message handling is now done through WebRTC manager
+// Chat messages are handled via Socket.IO events
 
 let sendMessage = async (e) => {
     e.preventDefault()
 
     let message = e.target.message.value
-    channel.sendMessage({text:JSON.stringify({'type':'chat', 'message':message, 'displayName':displayName})})
-    addMessageToDom(displayName, message)
-    e.target.reset()
+    if (message.trim()) {
+        webrtcManager.sendChatMessage(message)
+        addMessageToDom(displayName, message)
+        e.target.reset()
+    }
 }
 
 let addMessageToDom = (name, message) => {
@@ -118,8 +88,7 @@ let addBotMessageToDom = (botMessage) => {
 }
 
 let leaveChannel = async () => {
-    await channel.leave()
-    await rtmClient.logout()
+    await webrtcManager.leaveRoom()
 }
 
 window.addEventListener('beforeunload', leaveChannel)
