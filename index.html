@@ -24,20 +24,23 @@
 
         <main class="main-content">
             <div class="hero-section">
-                <div class="logo-circle">
-                    <i class="fas fa-video"></i>
+                <h1 class="welcome-title">Bienvenue !</h1>
+                <div class="logo-section">
+                    <div class="logo-circle">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                    </div>
+                    <h2>VideoConf</h2>
                 </div>
-                <h1>videoconf</h1>
-                <p class="subtitle">Connectez-vous face à face n'importe où</p>
+                <p class="subtitle">Connectez-vous à vos réunions</p>
                 
                 <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="showCreateMeeting()">
-                        <i class="fas fa-plus"></i>
-                        Nouvelle réunion
+                    <button class="btn btn-orange" onclick="showJoinMeeting()">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Rejoindre une réunion
                     </button>
-                    <button class="btn btn-secondary" onclick="showJoinMeeting()">
-                        <i class="fas fa-keyboard"></i>
-                        Saisir un code
+                    <button class="btn btn-green" onclick="showCreateMeeting()">
+                        <i class="fas fa-plus"></i>
+                        Créer une réunion
                     </button>
                 </div>
             </div>
@@ -121,6 +124,26 @@
                 </div>
             </div>
         </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-circle">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                    </div>
+                    <span>VideoConf</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#apropos">À propos</a>
+                    <a href="#fonctionnalites">Fonctionnalités</a>
+                    <a href="#support">Support</a>
+                    <a href="#confidentialite">Confidentialité</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2024 VideoConf. Tous droits réservés.
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- Modal pour rejoindre une réunion -->
