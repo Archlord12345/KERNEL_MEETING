@@ -11,16 +11,19 @@
     <div class="meeting-container">
         <!-- Header de la réunion -->
         <header class="meeting-header">
-            <div class="meeting-info">
-                <span class="meeting-title">VIDEOCONF</span>
-                <span class="meeting-status">EN LIGNE</span>
+            <div class="meeting-brand">
+                <div class="meeting-logo">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                </div>
+                <div class="meeting-info">
+                    <span class="meeting-title">VideoConf</span>
+                    <span class="meeting-subtitle">PROFESSIONAL MEETING</span>
+                </div>
             </div>
-            <div class="meeting-actions">
-                <button class="header-btn" onclick="toggleSettings()">
-                    <i class="fas fa-cog"></i>
-                </button>
-                <button class="header-btn danger" onclick="leaveMeeting()">
-                    <i class="fas fa-times"></i>
+            <div class="meeting-status-section">
+                <button class="status-btn connected">
+                    <i class="fas fa-circle"></i>
+                    Connected
                 </button>
             </div>
         </header>
@@ -30,8 +33,14 @@
             <div class="video-area">
                 <div class="main-video">
                     <video id="mainVideo" autoplay muted></video>
-                    <div class="video-overlay">
-                        <span class="speaker-name">Vous</span>
+                    <div class="video-controls-overlay">
+                        <button class="video-control-btn orange">
+                            <i class="fas fa-video"></i>
+                        </button>
+                    </div>
+                    <div class="speaker-info">
+                        <h3 class="speaker-name">Alex Johnson</h3>
+                        <span class="speaker-status">SPEAKING</span>
                     </div>
                 </div>
 

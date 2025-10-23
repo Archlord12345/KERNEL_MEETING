@@ -24,24 +24,26 @@
 
         <main class="create-meeting-content">
             <div class="form-container">
-                <h1>Rejoindre une réunion</h1>
+                <div class="page-header">
+                    <div class="logo-small">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                    </div>
+                    <h1>Rejoindre une réunion</h1>
+                </div>
                 
-                <div class="join-section">
-                    <input type="text" id="meetingId" placeholder="Entrez l'ID de la réunion" class="input-field">
-                    <button class="btn btn-success" onclick="joinExistingMeeting()">
-                        <i class="fas fa-sign-in-alt"></i>
+                <div class="join-form">
+                    <div class="join-input-group">
+                        <input type="text" id="meetingId" placeholder="Entrez le code de réunion" class="input-field-main">
+                        <button class="btn btn-scan" onclick="scanCode()">
+                            <i class="fas fa-qrcode"></i>
+                            Scanner
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-orange full-width" onclick="joinExistingMeeting()">
                         Rejoindre
                     </button>
                 </div>
-
-                <div class="divider">
-                    <span>ou</span>
-                </div>
-
-                <button class="btn btn-primary full-width" onclick="showCreateForm()">
-                    <i class="fas fa-plus"></i>
-                    Démarrer une nouvelle réunion
-                </button>
 
                 <div class="recent-meetings">
                     <h2>Réunions récentes</h2>
