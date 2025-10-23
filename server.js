@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const server = http.createServer(app);
@@ -33,6 +34,19 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname)));
 app.use(express.json());
 
+// Fonction pour obtenir l'adresse IP locale
+function getLocalIP() {
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost';
+}
+
 // Routes pour les nouvelles pages
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -40,6 +54,10 @@ app.get('/', (req, res) => {
 
 app.get('/index.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/join-meeting.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'join-meeting.html'));
 });
 
 app.get('/create-meeting.html', (req, res) => {
@@ -57,6 +75,19 @@ app.get('/lobby.html', (req, res) => {
 
 app.get('/room.html', (req, res) => {
     res.redirect('/meeting.html' + (req.url.includes('?') ? req.url.substring(req.url.indexOf('?')) : ''));
+});
+
+// API pour obtenir l'adresse de connexion
+app.get('/api/server-info', (req, res) => {
+    const port = server.address()?.port || 3000;
+    const localIP = getLocalIP();
+    
+    res.json({
+        ip: localIP,
+        port: port,
+        address: `${localIP}:${port}`,
+        localhost: `localhost:${port}`
+    });
 });
 
 // Store room information and meetings
@@ -427,6 +458,20 @@ setInterval(() => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Open http://localhost:${PORT} to access the application`);
+    const localIP = getLocalIP();
+    
+    console.log('🚀 KERNEL MEETING Server Started!');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log(`📡 Port: ${PORT}`);
+    console.log(`🌐 Local Network: http://${localIP}:${PORT}`);
+    console.log(`🏠 Localhost: http://localhost:${PORT}`);
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('✅ Server ready to accept connections');
+    console.log('📋 Available endpoints:');
+    console.log('   • GET  / - Homepage');
+    console.log('   • GET  /join-meeting.html - Join meeting page');
+    console.log('   • GET  /create-meeting.html - Create meeting page');
+    console.log('   • GET  /meeting.html - Meeting interface');
+    console.log('   • GET  /api/server-info - Server information');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 });

@@ -1,7 +1,7 @@
 {
-  "name": "videoconf-app",
+  "name": "kernel-meeting",
   "version": "2.0.0",
-  "description": "Application de vidéoconférence moderne avec interface utilisateur élégante",
+  "description": "KERNEL MEETING - Application de vidéoconférence moderne avec interface utilisateur élégante",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,6 +16,7 @@
     "nodemon": "^3.0.1"
   },
   "keywords": [
+    "kernel-meeting",
     "videoconference",
     "webrtc",
     "video-calling",
@@ -25,6 +26,6 @@
     "socket.io",
     "modern-ui"
   ],
-  "author": "VideoConf Team",
+  "author": "KERNEL MEETING Team",
   "license": "MIT"
 }

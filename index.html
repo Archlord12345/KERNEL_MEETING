@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoConf - Plateforme de Vidéoconférence</title>
+    <title>KERNEL MEETING - Plateforme de Vidéoconférence</title>
     <link rel="stylesheet" href="styles/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,7 +12,7 @@
         <header class="header">
             <div class="logo">
                 <i class="fas fa-video"></i>
-                <span>videoconf</span>
+                <span>KERNEL MEETING</span>
             </div>
             <nav class="nav">
                 <button class="nav-btn" onclick="showCreateMeeting()">
@@ -27,21 +27,53 @@
                 <h1 class="welcome-title">Bienvenue !</h1>
                 <div class="logo-section">
                     <div class="logo-circle">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                        <img src="./images/logo_sans-fond.png" alt="Kernel Meeting Logo">
                     </div>
-                    <h2>VideoConf</h2>
+                    <h2>KERNEL MEETING</h2>
                 </div>
                 <p class="subtitle">Connectez-vous à vos réunions</p>
                 
                 <div class="action-buttons">
-                    <button class="btn btn-orange" onclick="showJoinMeeting()">
+                    <button class="btn btn-orange" onclick="window.location.href='join-meeting.html'">
                         <i class="fas fa-sign-in-alt"></i>
                         Rejoindre une réunion
                     </button>
-                    <button class="btn btn-green" onclick="showCreateMeeting()">
+                    <button class="btn btn-green" onclick="window.location.href='create-meeting.html'">
                         <i class="fas fa-plus"></i>
                         Créer une réunion
                     </button>
+                </div>
+
+                <!-- Zone d'affichage de l'adresse de connexion -->
+                <div class="connection-info">
+                    <div class="connection-card">
+                        <div class="connection-header">
+                            <i class="fas fa-server"></i>
+                            <span>Adresse de connexion</span>
+                        </div>
+                        <div class="connection-addresses">
+                            <div class="address-item">
+                                <label>Réseau local :</label>
+                                <span id="networkAddress" class="address-value">Chargement...</span>
+                                <button class="copy-btn" onclick="copyAddress('network')" title="Copier">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="address-item">
+                                <label>Localhost :</label>
+                                <span id="localhostAddress" class="address-value">localhost:3000</span>
+                                <button class="copy-btn" onclick="copyAddress('localhost')" title="Copier">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="connection-status">
+                            <div class="status-indicator" id="serverStatus">
+                                <i class="fas fa-circle"></i>
+                                <span>Serveur en ligne</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -129,9 +161,9 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <div class="footer-logo-circle">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                        <img src="./images/logo_sans-fond.png" alt="Kernel Meeting Logo">
                     </div>
-                    <span>VideoConf</span>
+                    <span>KERNEL MEETING</span>
                 </div>
                 <div class="footer-links">
                     <a href="#apropos">À propos</a>
@@ -140,7 +172,7 @@
                     <a href="#confidentialite">Confidentialité</a>
                 </div>
                 <div class="footer-copyright">
-                    © 2024 VideoConf. Tous droits réservés.
+                    © 2024 KERNEL MEETING. Tous droits réservés.
                 </div>
             </div>
         </footer>

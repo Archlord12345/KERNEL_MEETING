@@ -16,6 +16,9 @@ function initializeApp() {
         setupSocketListeners();
     }
     
+    // Charger les informations du serveur
+    loadServerInfo();
+    
     // Définir la date actuelle pour les formulaires
     const today = new Date().toISOString().split('T')[0];
     const timeNow = new Date().toTimeString().split(' ')[0].substring(0, 5);
@@ -186,22 +189,98 @@ function generateRoomId() {
     return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
 
+// Fonction pour charger les informations du serveur
+async function loadServerInfo() {
+    try {
+        const response = await fetch('/api/server-info');
+        const serverInfo = await response.json();
+        
+        // Mettre à jour les adresses affichées
+        const networkAddress = document.getElementById('networkAddress');
+        const localhostAddress = document.getElementById('localhostAddress');
+        
+        if (networkAddress) {
+            networkAddress.textContent = serverInfo.address;
+        }
+        
+        if (localhostAddress) {
+            localhostAddress.textContent = serverInfo.localhost;
+        }
+        
+        // Stocker les adresses pour la copie
+        window.serverAddresses = {
+            network: serverInfo.address,
+            localhost: serverInfo.localhost
+        };
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement des informations du serveur:', error);
+        
+        // Afficher une adresse par défaut
+        const networkAddress = document.getElementById('networkAddress');
+        const localhostAddress = document.getElementById('localhostAddress');
+        
+        if (networkAddress) {
+            networkAddress.textContent = 'localhost:3000';
+        }
+        
+        if (localhostAddress) {
+            localhostAddress.textContent = 'localhost:3000';
+        }
+        
+        window.serverAddresses = {
+            network: 'localhost:3000',
+            localhost: 'localhost:3000'
+        };
+    }
+}
+
+// Fonction pour copier une adresse dans le presse-papiers
+async function copyAddress(type) {
+    try {
+        const address = window.serverAddresses?.[type] || 'localhost:3000';
+        
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(address);
+        } else {
+            // Fallback pour les navigateurs plus anciens
+            const textArea = document.createElement('textarea');
+            textArea.value = address;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
+        
+        showNotification(`Adresse copiée: ${address}`, 'success');
+        
+        // Animation du bouton
+        const button = event.target.closest('.copy-btn');
+        if (button) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.style.background = '#00C851';
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.style.background = '#FF6B35';
+            }, 1500);
+        }
+        
+    } catch (error) {
+        console.error('Erreur lors de la copie:', error);
+        showNotification('Erreur lors de la copie', 'error');
+    }
+}
+
 function showNotification(message, type = 'info') {
-    // Créer la notification
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas fa-${getNotificationIcon(type)}"></i>
-            <span>${message}</span>
-        </div>
-        <button class="notification-close" onclick="this.parentElement.remove()">
-            <i class="fas fa-times"></i>
-        </button>
-    `;
-    
-    // Ajouter les styles si pas encore présents
-    if (!document.getElementById('notification-styles')) {
+    // Créer l'élément de notification s'il n'existe pas
+    let notification = document.getElementById('notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification';
+        notification.className = 'notification';
+        document.body.appendChild(notification);
         const styles = document.createElement('style');
         styles.id = 'notification-styles';
         styles.textContent = `
@@ -332,3 +411,5 @@ window.joinMeeting = joinMeeting;
 window.createMeeting = createMeeting;
 window.goToCreateMeeting = goToCreateMeeting;
 window.goToHome = goToHome;
+window.copyAddress = copyAddress;
+window.loadServerInfo = loadServerInfo;

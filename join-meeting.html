@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejoindre une réunion - KERNEL MEETING</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-video"></i>
+                <span>KERNEL MEETING</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="window.location.href='index.html'">
+                    <i class="fas fa-home"></i>
+                    Accueil
+                </button>
+            </nav>
+        </header>
+
+        <main class="join-meeting-content">
+            <div class="form-container">
+                <div class="page-header">
+                    <div class="logo-medium">
+                        <img src="./images/logo_sans-fond.png" alt="Kernel Meeting Logo">
+                    </div>
+                    <h1>Rejoindre une réunion</h1>
+                </div>
+                
+                <div class="join-form">
+                    <div class="join-input-group">
+                        <input type="text" id="meetingId" placeholder="Entrez le code de réunion" class="input-field-main">
+                        <button class="btn btn-scan" onclick="scanCode()">
+                            <i class="fas fa-qrcode"></i>
+                            Scanner
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-orange full-width" onclick="joinExistingMeeting()">
+                        Rejoindre
+                    </button>
+                </div>
+
+                <div class="recent-meetings">
+                    <h2><i class="fas fa-history"></i> Réunions récentes</h2>
+                    
+                    <div class="meeting-cards">
+                        <div class="meeting-card">
+                            <div class="meeting-icon green">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="meeting-details">
+                                <h3>Réunion d'équipe</h3>
+                                <p class="meeting-code">abc-defg-hij</p>
+                                <p class="meeting-time">Hier • 14:30</p>
+                            </div>
+                        </div>
+                        
+                        <div class="meeting-card">
+                            <div class="meeting-icon blue">
+                                <i class="fas fa-presentation"></i>
+                            </div>
+                            <div class="meeting-details">
+                                <h3>Présentation client</h3>
+                                <p class="meeting-code">xyz-mnop-qrs</p>
+                                <p class="meeting-time">Il y a 2 jours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="meeting-card">
+                            <div class="meeting-icon orange">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="meeting-details">
+                                <h3>Planification projet</h3>
+                                <p class="meeting-code">pqr-stuv-wxy</p>
+                                <p class="meeting-time">Il y a 3 jours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-history">
+                    <h2><i class="fas fa-search"></i> Historique de recherche</h2>
+                    
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="history-details">
+                                <span class="history-code">abc-defg-hij</span>
+                                <span class="history-date">Réunion d'équipe • Consulté il y a 1 jour</span>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="history-details">
+                                <span class="history-code">xyz-mnop-qrs</span>
+                                <span class="history-date">Présentation client • Consulté il y a 2 jours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="history-details">
+                                <span class="history-code">pqr-stuv-wxy</span>
+                                <span class="history-date">Planification projet • Consulté il y a 1 semaine</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons-bottom">
+                    <button class="btn btn-outline" onclick="window.location.href='create-meeting.html'">
+                        <i class="fas fa-plus"></i>
+                        Créer une nouvelle réunion
+                    </button>
+                    <button class="btn btn-outline" onclick="joinByInvitation()">
+                        <i class="fas fa-envelope"></i>
+                        Rejoindre par invitation
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notification" class="notification"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/join-meeting.js"></script>
+</body>
+</html>

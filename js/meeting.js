@@ -587,6 +587,11 @@ function toggleSettings() {
     showNotification('Paramètres à venir', 'info');
 }
 
+function toggleRecording() {
+    showNotification('Enregistrement à venir', 'info');
+    // Ici on implémenterait l'enregistrement de la réunion
+}
+
 // Export des fonctions pour utilisation globale
 window.toggleMute = toggleMute;
 window.toggleVideo = toggleVideo;
@@ -596,3 +601,4 @@ window.toggleChat = toggleChat;
 window.sendMessage = sendMessage;
 window.handleMessageInput = handleMessageInput;
 window.toggleSettings = toggleSettings;
+window.toggleRecording = toggleRecording;

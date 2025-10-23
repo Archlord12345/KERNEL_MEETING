@@ -364,9 +364,16 @@ function showNotification(message, type = 'info') {
     alert(message);
 }
 
+// Fonction pour scanner un code QR (simulation)
+function scanCode() {
+    showNotification('Fonction de scan QR à venir...', 'info');
+    // Ici on pourrait intégrer une bibliothèque de scan QR comme QuaggaJS ou ZXing
+}
+
 // Export des fonctions pour utilisation globale
 window.joinExistingMeeting = joinExistingMeeting;
 window.showCreateForm = showCreateForm;
 window.createNewMeeting = createNewMeetingRedirect;
 window.refreshMeetings = refreshMeetings;
 window.joinMeetingById = joinMeetingById;
+window.scanCode = scanCode;

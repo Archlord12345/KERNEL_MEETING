@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer une réunion - VideoConf</title>
+    <title>Créer une réunion - KERNEL MEETING</title>
     <link rel="stylesheet" href="styles/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,7 +12,7 @@
         <header class="header">
             <div class="logo">
                 <i class="fas fa-video"></i>
-                <span>videoconf</span>
+                <span>KERNEL MEETING</span>
             </div>
             <nav class="nav">
                 <button class="nav-btn" onclick="window.location.href='index.html'">
@@ -25,23 +25,26 @@
         <main class="create-meeting-content">
             <div class="form-container">
                 <div class="page-header">
-                    <div class="logo-small">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FF6B35'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E" alt="VideoConf Logo">
+                    <div class="logo-medium">
+                        <img src="./images/logo_sans-fond.png" alt="Kernel Meeting Logo">
                     </div>
-                    <h1>Rejoindre une réunion</h1>
+                    <h1>Créer une nouvelle réunion</h1>
+                    <p class="page-subtitle">Configurez votre réunion avec tous les paramètres souhaités</p>
                 </div>
                 
-                <div class="join-form">
-                    <div class="join-input-group">
-                        <input type="text" id="meetingId" placeholder="Entrez le code de réunion" class="input-field-main">
-                        <button class="btn btn-scan" onclick="scanCode()">
-                            <i class="fas fa-qrcode"></i>
-                            Scanner
-                        </button>
+                <div class="create-form">
+                    <button class="btn btn-green full-width" onclick="showCreateForm()">
+                        <i class="fas fa-plus"></i>
+                        Démarrer une nouvelle réunion
+                    </button>
+                    
+                    <div class="divider">
+                        <span>ou</span>
                     </div>
                     
-                    <button class="btn btn-orange full-width" onclick="joinExistingMeeting()">
-                        Rejoindre
+                    <button class="btn btn-outline full-width" onclick="window.location.href='join-meeting.html'">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Rejoindre une réunion existante
                     </button>
                 </div>
 
