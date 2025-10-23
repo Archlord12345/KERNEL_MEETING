@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoConf - Plateforme de Vidéoconférence</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-video"></i>
+                <span>videoconf</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="showCreateMeeting()">
+                    <i class="fas fa-plus"></i>
+                    Créer une réunion
+                </button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <div class="hero-section">
+                <div class="logo-circle">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h1>videoconf</h1>
+                <p class="subtitle">Connectez-vous face à face n'importe où</p>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="showCreateMeeting()">
+                        <i class="fas fa-plus"></i>
+                        Nouvelle réunion
+                    </button>
+                    <button class="btn btn-secondary" onclick="showJoinMeeting()">
+                        <i class="fas fa-keyboard"></i>
+                        Saisir un code
+                    </button>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2>Nos fonctionnalités</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Sécurisé</h3>
+                        <p>Chiffrement de bout en bout</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Collaboratif</h3>
+                        <p>Jusqu'à 100 participants</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Multi-plateforme</h3>
+                        <p>Compatible tous appareils</p>
+                    </div>
+                </div>
+
+                <div class="features-grid-bottom">
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <i class="fas fa-record-vinyl"></i>
+                        </div>
+                        <h3>Enregistrement</h3>
+                        <p>Sauvegardez vos réunions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Partage d'écran</h3>
+                        <p>Présentations fluides</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon green">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Chat intégré</h3>
+                        <p>Messagerie en temps réel</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon blue">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Personnalisable</h3>
+                        <p>Interface adaptable</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-features">
+                <div class="bottom-feature">
+                    <div class="feature-icon green">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <span>Planification</span>
+                </div>
+                <div class="bottom-feature">
+                    <div class="feature-icon green">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <span>Calendrier</span>
+                </div>
+                <div class="bottom-feature">
+                    <div class="feature-icon green">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <span>Statistiques</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal pour rejoindre une réunion -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Rejoindre une réunion</h3>
+                <span class="close" onclick="closeModal('joinModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="meetingCode" placeholder="Entrez le code de la réunion" class="input-field">
+                <button class="btn btn-primary" onclick="joinMeeting()">Rejoindre</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
