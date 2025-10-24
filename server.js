@@ -30,9 +30,17 @@ app.use((req, res, next) => {
     next();
 });
 
-// Serve static files
-app.use(express.static(path.join(__dirname)));
 app.use(express.json());
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
+        return next();
+    }
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 // Fonction pour obtenir l'adresse IP locale
 function getLocalIP() {
@@ -468,10 +476,10 @@ server.listen(PORT, () => {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('✅ Server ready to accept connections');
     console.log('📋 Available endpoints:');
-    console.log('   • GET  / - Homepage');
-    console.log('   • GET  /join-meeting.html - Join meeting page');
-    console.log('   • GET  /create-meeting.html - Create meeting page');
-    console.log('   • GET  /meeting.html - Meeting interface');
-    console.log('   • GET  /api/server-info - Server information');
+    console.log('   • GET  / (SPA React build)');
+    console.log('   • GET  /api/server-info');
+    console.log('   • GET  /api/meetings');
+    console.log('   • GET  /api/meetings/:roomId');
+    console.log('   • WebSocket  /socket.io/*');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 });

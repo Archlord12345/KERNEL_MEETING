@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "validate": "node validate.js"
+    "validate": "node validate.js",
+    "client:dev": "npm --prefix client run dev",
+    "client:build": "npm --prefix client run build",
+    "client:preview": "npm --prefix client run preview"
   },
   "dependencies": {
     "express": "^4.18.2",
