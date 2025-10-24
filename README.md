@@ -1,6 +1,6 @@
 # VideoConf - Application de Vidéoconférence Moderne
 
-Une application de vidéoconférence complète et moderne construite avec Node.js, Socket.IO, et WebRTC, offrant une interface utilisateur élégante et des fonctionnalités avancées.
+Une application de vidéoconférence complète et moderne construite avec **React + Vite** (frontend) et **Node.js/Express + Socket.IO** (backend), offrant une interface utilisateur élégante et des fonctionnalités avancées.
 
 ## ✨ Fonctionnalités
 
